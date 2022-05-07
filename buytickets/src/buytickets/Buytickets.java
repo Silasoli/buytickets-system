@@ -5,11 +5,7 @@
 package buytickets;
 
 import DBConnection.DBConnection;
-import com.mongodb.MongoClient;
-import com.mongodb.MongoClientURI;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
-import org.bson.Document;
+
 /**
  *
  *
@@ -23,6 +19,6 @@ public class Buytickets {
     public static void main(String[] args) {
         DBConnection connection = new DBConnection();
         connection.tryToConnect();
-        
+
     }
 }
