@@ -10,6 +10,7 @@ package users.users;
  */
 public class BuyerUser extends User {
 
+    @Override
     public String create(String name, String birthDate, String cpf, String address) {
         this.type = "BUYER_USER";
         this.ticketBalance = 0;
