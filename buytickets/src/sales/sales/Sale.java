@@ -14,8 +14,8 @@ public class Sale {
     private long sellerId;
     private long buyerId;
     private boolean saleMade;
-    private int cashValue;
-    private int ticketValue;
+    private double cashValue;
+    private double ticketValue;
 
     public boolean isSaleMade() {
         return saleMade;
@@ -25,7 +25,7 @@ public class Sale {
         this.saleMade = saleMade;
     }
 
-    public int getCashValue() {
+    public double getCashValue() {
         return cashValue;
     }
 
@@ -33,7 +33,7 @@ public class Sale {
         this.cashValue = cashValue;
     }
 
-    public int getTicketValue() {
+    public double getTicketValue() {
         return ticketValue;
     }
 
