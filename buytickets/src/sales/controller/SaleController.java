@@ -4,7 +4,6 @@
  */
 package sales.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import sales.model.RamSaleDAO;
 import sales.model.SaleDAO;
