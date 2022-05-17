@@ -13,13 +13,13 @@ import sales.sales.Sale;
  */
 public interface SaleDAO {
 
-    public long create(Sale P) throws Exception;
+    public long create(Sale sale) throws Exception;
 
-    public void update(Sale P) throws Exception;
+    public void update(Sale sale) throws Exception;
 
-    public void remove(int produtoId) throws Exception;
+    public void remove(long saleId) throws Exception;
 
-    public Sale findOne(int produtoId) throws Exception;
+    public Sale findOne(long saleId) throws Exception;
 
     public List<Sale> findAll() throws Exception;
 

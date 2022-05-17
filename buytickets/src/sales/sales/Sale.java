@@ -17,6 +17,10 @@ public class Sale {
     private double cashValue;
     private double ticketValue;
 
+    public Sale() {
+        //empty constructor
+    }
+    
     public boolean isSaleMade() {
         return saleMade;
     }
@@ -41,10 +45,6 @@ public class Sale {
         this.ticketValue = ticketValue;
     }
 
-    public Sale() {
-        //empty constructor
-    }
-
     public long getSaleId() {
         return saleId;
     }
@@ -55,6 +55,26 @@ public class Sale {
 
     public long getBuyerId() {
         return buyerId;
+    }
+
+    public void setSaleId(long saleId) {
+        this.saleId = saleId;
+    }
+
+    public void setSellerId(long sellerId) {
+        this.sellerId = sellerId;
+    }
+
+    public void setBuyerId(long buyerId) {
+        this.buyerId = buyerId;
+    }
+
+    public void setCashValue(double cashValue) {
+        this.cashValue = cashValue;
+    }
+
+    public void setTicketValue(double ticketValue) {
+        this.ticketValue = ticketValue;
     }
 
 }
