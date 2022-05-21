@@ -16,18 +16,6 @@ public class User {
     protected String address;
     protected String type;
     protected int ticketBalance;
-
-    public boolean validateCPF(String cpf) {
-        //retornar true ou false pra validar o cpf
-        return true;
-    }
-
-    public String create(String name, String birthDate, String cpf, String address) {
-        //Quando um usuario for criado receberá zero como saldo
-        this.type = "USER";
-        this.ticketBalance = 0;
-        //Desenvolver metodo externo pra validar CPF
-        //Desenvolver logica para cadastrar e retornar mensagem de sucesso ou falha
-        return "Criado com sucesso";
-    }
+    private int cashBalance;
+   
 }

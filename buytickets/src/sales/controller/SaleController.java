@@ -4,6 +4,7 @@
  */
 package sales.controller;
 
+import java.util.Arrays;
 import java.util.List;
 import sales.model.RamSaleDAO;
 import sales.model.SaleDAO;
@@ -46,5 +47,16 @@ public class SaleController {
     public List<Sale> findAll() throws Exception {
         return dao.findAll();
     }
+
+    //public static void main(String[] args) throws Exception {
+        //Sale sale = new Sale();
+        //sale.setCashValue(100.0);
+        //sale.setTicketValue(200.0);
+        //sale.setSaleMade(false);
+        //sale.setSellerId(Long.valueOf(0001));
+
+        //SaleController controller = new SaleController();
+        //controller.create(sale);
+    //}
 
 }

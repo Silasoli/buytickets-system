@@ -33,16 +33,8 @@ public class Sale {
         return cashValue;
     }
 
-    public void setCashValue(int cashValue) {
-        this.cashValue = cashValue;
-    }
-
     public double getTicketValue() {
         return ticketValue;
-    }
-
-    public void setTicketValue(int ticketValue) {
-        this.ticketValue = ticketValue;
     }
 
     public long getSaleId() {
