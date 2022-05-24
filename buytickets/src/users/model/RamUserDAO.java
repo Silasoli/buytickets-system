@@ -29,6 +29,10 @@ public class RamUserDAO implements UserDAO {
         //pegar usuario pelo cpf e pelo password verifica se são o mesmo e retorna true ou falso
         //return map.get(cpf);
         //return map.get(password);
+        System.out.println("No controller");
+        System.out.println(cpf);
+        System.out.println(password);
+
         return true;
     }
 
@@ -56,7 +60,7 @@ public class RamUserDAO implements UserDAO {
 
     @Override
     public List<User> findAll() throws Exception {
-       return new ArrayList<>(map.values());
+        return new ArrayList<>(map.values());
     }
 
     @Override
