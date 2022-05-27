@@ -53,6 +53,7 @@ public class LoginJDialog extends javax.swing.JDialog {
 
         jLabel2.setText("Senha:");
 
+        jLabel3.setFont(new java.awt.Font("Microsoft YaHei UI Light", 0, 80)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("BuyTickets");
 
