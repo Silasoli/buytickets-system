@@ -18,6 +18,7 @@ public class RamSaleDAO implements SaleDAO {
 
     private Map<Long, Sale> map;
     private long contador;
+    public Sale sale;
 
     public RamSaleDAO() {
         map = new HashMap<>();
@@ -51,4 +52,19 @@ public class RamSaleDAO implements SaleDAO {
         return new ArrayList<>(map.values());
     }
 
+    @Override
+    public void createMockSales() {
+        for (int i = 1; i < 5; i++) {
+            sale = new Sale();
+            sale.setTicketValue(200 * i);
+            sale.setCashValue(100 * i);
+            sale.setSaleId(contador++);
+            map.put(sale.getSaleId(), sale);
+        }
+        for (Long i : map.keySet()) {
+            System.out.println(map.get(i).getSaleId());
+            System.out.println(map.get(i).getBuyerId());
+
+        }
+    }
 }

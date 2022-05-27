@@ -31,7 +31,7 @@ public class UserController {
         return instance;
     }
 
-    public boolean login(String name, String password) throws Exception {
+    public User login(String name, String password) throws Exception {
         if (name.length() == 0 || password.length() == 0) {
             throw new Exception("Login não realizado");
         }

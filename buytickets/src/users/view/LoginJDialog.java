@@ -2,6 +2,7 @@ package users.view;
 
 import javax.swing.JOptionPane;
 import users.controller.UserController;
+import users.users.User;
 
 /**
  *
@@ -11,6 +12,7 @@ public class LoginJDialog extends javax.swing.JDialog {
 
     public String name;
     public String password;
+    public User userInSession;
 
     /**
      *
@@ -28,7 +30,7 @@ public class LoginJDialog extends javax.swing.JDialog {
     public void init() {
 
     }
-
+   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -120,10 +122,11 @@ public class LoginJDialog extends javax.swing.JDialog {
             this.name = nameUser.getText();
             this.password = passwordUser.getText();
 
-            System.out.println(UserController.getInstance().login(this.name, this.password));
-
-            JOptionPane.showMessageDialog(this, "Logado");
+            userInSession = UserController.getInstance().login(this.name, this.password);
             setVisible(false);
+
+            HomeJDialog homeJDialog = new HomeJDialog(null, userInSession);
+            homeJDialog.setVisible(true);
 
         } catch (Exception err) {
             JOptionPane.showMessageDialog(this, err);
@@ -131,11 +134,11 @@ public class LoginJDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_loginjButtonActionPerformed
 
     public static void main(String arg[]) {
-        LoginJDialog dialog = new LoginJDialog(null);
-        dialog.setVisible(true);
-        dialog.dispose();
+        LoginJDialog loginJDialog = new LoginJDialog(null);
+        loginJDialog.setVisible(true);
+        loginJDialog.dispose();
 
-        dialog = null;
+        loginJDialog = null;
 
     }
 

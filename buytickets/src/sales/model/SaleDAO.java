@@ -15,6 +15,8 @@ public interface SaleDAO {
 
     public long create(Sale sale) throws Exception;
 
+    public void createMockSales();
+
     public void update(Sale sale) throws Exception;
 
     public void remove(long saleId) throws Exception;

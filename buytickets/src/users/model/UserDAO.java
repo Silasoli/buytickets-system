@@ -13,7 +13,7 @@ import users.users.User;
  */
 public interface UserDAO {
 
-    public boolean login(String cpf, String password) throws Exception;
+    public User login(String cpf, String password) throws Exception;
     
     public long create(User user) throws Exception;
 

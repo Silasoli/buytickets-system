@@ -16,10 +16,20 @@ import sales.sales.Sale;
  */
 public class SaleController {
 
+    private static SaleController instance;
+
     private SaleDAO dao;
 
-    public SaleController() {
+    private SaleController() {
         dao = new RamSaleDAO();
+    }
+
+    public static SaleController getInstance() {
+
+        if (instance == null) {
+            instance = new SaleController();
+        }
+        return instance;
     }
 
     public long create(Sale sale) throws Exception {
@@ -27,6 +37,10 @@ public class SaleController {
             throw new Exception("Não é possivel cadastrar um produto vazio");
         }
         return dao.create(sale);
+    }
+
+    public void createMockSales(){
+        dao.createMockSales();
     }
 
     public void update(Sale sale) throws Exception {
@@ -47,16 +61,4 @@ public class SaleController {
     public List<Sale> findAll() throws Exception {
         return dao.findAll();
     }
-
-    //public static void main(String[] args) throws Exception {
-        //Sale sale = new Sale();
-        //sale.setCashValue(100.0);
-        //sale.setTicketValue(200.0);
-        //sale.setSaleMade(false);
-        //sale.setSellerId(Long.valueOf(0001));
-
-        //SaleController controller = new SaleController();
-        //controller.create(sale);
-    //}
-
 }

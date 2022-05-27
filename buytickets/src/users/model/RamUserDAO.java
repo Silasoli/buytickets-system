@@ -25,10 +25,10 @@ public class RamUserDAO implements UserDAO {
     }
 
     @Override
-    public boolean login(String name, String password) throws Exception {
+    public User login(String name, String password) throws Exception {
         for (Long i : map.keySet()) {
             if (new String(map.get(i).getName()).equals(new String(name)) && new String(map.get(i).getPassword()).equals(new String(password))) {
-                return true;
+                return map.get(i);
             } else {
                 throw new Exception("Dados incorretos, tente novamente!");
             }
@@ -39,6 +39,7 @@ public class RamUserDAO implements UserDAO {
     @Override
     public long create(User user) throws Exception {
         user.setUserId(contador++);
+        user.setTicketBalance(0.00);
         map.put(user.getUserId(), user);
         return user.getUserId();
     }

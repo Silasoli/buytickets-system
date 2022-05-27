@@ -15,7 +15,6 @@ public class User {
     private String password;
     private String type;
     private double ticketBalance;
-    private double cashBalance;
 
     public long getUserId() {
         return userId;
@@ -56,13 +55,4 @@ public class User {
     public void setTicketBalance(double ticketBalance) {
         this.ticketBalance = ticketBalance;
     }
-
-    public double getCashBalance() {
-        return cashBalance;
-    }
-
-    public void setCashBalance(double cashBalance) {
-        this.cashBalance = cashBalance;
-    }
-
 }

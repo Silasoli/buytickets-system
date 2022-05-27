@@ -1,6 +1,7 @@
 package users.view;
 
 import javax.swing.JOptionPane;
+import sales.controller.SaleController;
 import users.controller.UserController;
 import users.users.User;
 
@@ -148,11 +149,13 @@ public class CreateUserJDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_savejButtonActionPerformed
 
     public static void main(String args[]) {
-        CreateUserJDialog dialog = new CreateUserJDialog(null);
-        dialog.setVisible(true);
-        dialog.dispose();
+        SaleController.getInstance().createMockSales();
 
-        dialog = null;
+        CreateUserJDialog createUserJDialog = new CreateUserJDialog(null);
+        createUserJDialog.setVisible(true);
+        createUserJDialog.dispose();
+
+        createUserJDialog = null;
 
     }
 
