@@ -25,27 +25,27 @@ public class RamUserDAO implements UserDAO {
     }
 
     @Override
-    public boolean login(String cpf, String password) throws Exception {
-        //pegar usuario pelo cpf e pelo password verifica se são o mesmo e retorna true ou falso
-        //return map.get(cpf);
-        //return map.get(password);
-        System.out.println("No controller");
-        System.out.println(cpf);
-        System.out.println(password);
-
-        return true;
+    public boolean login(String name, String password) throws Exception {
+        for (Long i : map.keySet()) {
+            if (new String(map.get(i).getName()).equals(new String(name)) && new String(map.get(i).getPassword()).equals(new String(password))) {
+                return true;
+            } else {
+                throw new Exception("Dados incorretos, tente novamente!");
+            }
+        }
+        throw new Exception();
     }
 
     @Override
     public long create(User user) throws Exception {
-        user.setSaleId(contador++);
-        map.put(user.getSaleId(), user);
-        return user.getSaleId();
+        user.setUserId(contador++);
+        map.put(user.getUserId(), user);
+        return user.getUserId();
     }
 
     @Override
     public void update(User user) throws Exception {
-        map.put(user.getSaleId(), user);
+        map.put(user.getUserId(), user);
     }
 
     @Override

@@ -10,21 +10,19 @@ package users.users;
  */
 public class User {
 
-    private long saleId;
+    private long userId;
     private String name;
-    private String cpf;
     private String password;
-    private String address;
     private String type;
     private double ticketBalance;
     private double cashBalance;
 
-    public long getSaleId() {
-        return saleId;
+    public long getUserId() {
+        return userId;
     }
 
-    public void setSaleId(long saleId) {
-        this.saleId = saleId;
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
 
     public String getPassword() {
@@ -41,22 +39,6 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
     }
 
     public String getType() {
@@ -83,5 +65,4 @@ public class User {
         this.cashBalance = cashBalance;
     }
 
-  
 }

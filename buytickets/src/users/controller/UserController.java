@@ -16,17 +16,32 @@ import users.users.User;
  */
 public class UserController {
 
+    private static UserController instance;
     private UserDAO dao;
 
-    public UserController() {
+    private UserController() {
         dao = new RamUserDAO();
     }
 
-    public boolean login(String cpf, String password) throws Exception {
-        return dao.login(cpf, password);
+    public static UserController getInstance() {
+
+        if (instance == null) {
+            instance = new UserController();
+        }
+        return instance;
+    }
+
+    public boolean login(String name, String password) throws Exception {
+        if (name.length() == 0 || password.length() == 0) {
+            throw new Exception("Login não realizado");
+        }
+        return dao.login(name, password);
     }
 
     public long create(User user) throws Exception {
+        if (user.getName().length() == 0 || user.getPassword().length() == 0) {
+            throw new Exception("Cadastro não realizado");
+        }
         return dao.create(user);
     }
 
