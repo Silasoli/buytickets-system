@@ -62,11 +62,8 @@ public class RamSaleDAO implements SaleDAO {
             sale.setSaleId(contador++);
             map.put(sale.getSaleId(), sale);
         }
-        for (Long i : map.keySet()) {
-            System.out.println(map.get(i).getSaleId());
-            System.out.println(map.get(i).getName());
-            //System.out.println(map.get(i).getBuyerId());
-
+        if(map.size()>=4){
+        System.out.println("Dados importados com sucesso!");            
         }
     }
 }
