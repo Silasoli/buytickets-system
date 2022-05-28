@@ -12,7 +12,6 @@ public class Sale {
 
     private long saleId;
     private String name;
-    private long buyerId;
     private double cashValue;
     private double ticketValue;
 
@@ -40,16 +39,8 @@ public class Sale {
         return saleId;
     }
 
-    public long getBuyerId() {
-        return buyerId;
-    }
-
     public void setSaleId(long saleId) {
         this.saleId = saleId;
-    }
-
-    public void setBuyerId(long buyerId) {
-        this.buyerId = buyerId;
     }
 
     public void setCashValue(double cashValue) {

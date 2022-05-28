@@ -29,8 +29,6 @@ public class RamUserDAO implements UserDAO {
         for (Long i : map.keySet()) {
             if (new String(map.get(i).getName()).equals(new String(name)) && new String(map.get(i).getPassword()).equals(new String(password))) {
                 return map.get(i);
-            } else {
-                throw new Exception("Dados incorretos, tente novamente!");
             }
         }
         throw new Exception();

@@ -1,6 +1,5 @@
 package users.view;
 
-import java.awt.Color;
 import java.util.List;
 import javax.swing.JOptionPane;
 import sales.controller.SaleController;
@@ -34,12 +33,20 @@ public class HomeJDialog extends javax.swing.JDialog {
 
     public void init() {
         saleTableModel = new SaleTableModel();
-        jTable2.setModel(saleTableModel);
+        jTable.setModel(saleTableModel);
     }
 
     public void setUserInScreen() {
         userNamejLabel.setText(userInSession.getName());
         userTicketBalancejLabel.setText("R$ " + String.valueOf(userInSession.getTicketBalance()));
+    }
+
+    public Sale getSaleSelected() throws Exception {
+        int line = jTable.getSelectedRow();
+        if (line == -1) {
+            throw new Exception("Selecione um item na tabela");
+        }
+        return saleTableModel.get(line);
     }
 
     @SuppressWarnings("unchecked")
@@ -53,12 +60,12 @@ public class HomeJDialog extends javax.swing.JDialog {
         jLabel4 = new javax.swing.JLabel();
         userTicketBalancejLabel = new javax.swing.JLabel();
         userNamejLabel = new javax.swing.JLabel();
-        getUserPurchasesjButton = new javax.swing.JButton();
-        closeProgramjButton2 = new javax.swing.JButton();
+        logOutjButton = new javax.swing.JButton();
+        closeProgramjButton = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        jTable = new javax.swing.JTable();
         listSalesjButton = new javax.swing.JButton();
         buyjButton = new javax.swing.JButton();
 
@@ -89,21 +96,21 @@ public class HomeJDialog extends javax.swing.JDialog {
         userNamejLabel.setAutoscrolls(true);
         userNamejLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        getUserPurchasesjButton.setBackground(new java.awt.Color(255, 255, 255));
-        getUserPurchasesjButton.setText("Encerrar sessão");
-        getUserPurchasesjButton.setFocusPainted(false);
-        getUserPurchasesjButton.addActionListener(new java.awt.event.ActionListener() {
+        logOutjButton.setBackground(new java.awt.Color(255, 255, 255));
+        logOutjButton.setText("Encerrar sessão");
+        logOutjButton.setFocusPainted(false);
+        logOutjButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                getUserPurchasesjButtonActionPerformed(evt);
+                logOutjButtonActionPerformed(evt);
             }
         });
 
-        closeProgramjButton2.setBackground(new java.awt.Color(255, 255, 255));
-        closeProgramjButton2.setText("Fechar Programa");
-        closeProgramjButton2.setFocusPainted(false);
-        closeProgramjButton2.addActionListener(new java.awt.event.ActionListener() {
+        closeProgramjButton.setBackground(new java.awt.Color(255, 255, 255));
+        closeProgramjButton.setText("Fechar Programa");
+        closeProgramjButton.setFocusPainted(false);
+        closeProgramjButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                closeProgramjButton2ActionPerformed(evt);
+                closeProgramjButtonActionPerformed(evt);
             }
         });
 
@@ -126,13 +133,13 @@ public class HomeJDialog extends javax.swing.JDialog {
                         .addGap(0, 17, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(getUserPurchasesjButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(logOutjButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(closeProgramjButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(closeProgramjButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel3)
@@ -155,9 +162,9 @@ public class HomeJDialog extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(userTicketBalancejLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(getUserPurchasesjButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(logOutjButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(closeProgramjButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(closeProgramjButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel3Layout.createSequentialGroup()
@@ -170,7 +177,7 @@ public class HomeJDialog extends javax.swing.JDialog {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Ofertas");
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        jTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -196,7 +203,7 @@ public class HomeJDialog extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(jTable);
 
         listSalesjButton.setBackground(new java.awt.Color(255, 255, 255));
         listSalesjButton.setText("Listar");
@@ -208,6 +215,11 @@ public class HomeJDialog extends javax.swing.JDialog {
 
         buyjButton.setBackground(new java.awt.Color(255, 255, 255));
         buyjButton.setText("Comprar");
+        buyjButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buyjButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -236,8 +248,8 @@ public class HomeJDialog extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(buyjButton)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addComponent(buyjButton, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -279,11 +291,11 @@ public class HomeJDialog extends javax.swing.JDialog {
         fillOfferTable();
     }//GEN-LAST:event_listSalesjButtonActionPerformed
 
-    private void closeProgramjButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeProgramjButton2ActionPerformed
+    private void closeProgramjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeProgramjButtonActionPerformed
         System.exit(0);
-    }//GEN-LAST:event_closeProgramjButton2ActionPerformed
+    }//GEN-LAST:event_closeProgramjButtonActionPerformed
 
-    private void getUserPurchasesjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getUserPurchasesjButtonActionPerformed
+    private void logOutjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logOutjButtonActionPerformed
         userInSession = null;
         setVisible(false);
 
@@ -291,7 +303,15 @@ public class HomeJDialog extends javax.swing.JDialog {
         loginJDialog.setVisible(true);
         loginJDialog.dispose();
         loginJDialog = null;
-    }//GEN-LAST:event_getUserPurchasesjButtonActionPerformed
+    }//GEN-LAST:event_logOutjButtonActionPerformed
+
+    private void buyjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buyjButtonActionPerformed
+        try {
+        } catch (Exception err) {
+            JOptionPane.showMessageDialog(this, "Falha ao comprar");
+
+        }
+    }//GEN-LAST:event_buyjButtonActionPerformed
 
     public void fillOfferTable() {
         try {
@@ -318,8 +338,7 @@ public class HomeJDialog extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buyjButton;
-    private javax.swing.JButton closeProgramjButton2;
-    private javax.swing.JButton getUserPurchasesjButton;
+    private javax.swing.JButton closeProgramjButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -328,8 +347,9 @@ public class HomeJDialog extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JTable jTable;
     private javax.swing.JButton listSalesjButton;
+    private javax.swing.JButton logOutjButton;
     private javax.swing.JLabel userNamejLabel;
     private javax.swing.JLabel userTicketBalancejLabel;
     // End of variables declaration//GEN-END:variables
