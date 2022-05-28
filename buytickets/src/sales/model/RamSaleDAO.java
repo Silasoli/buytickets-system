@@ -56,6 +56,7 @@ public class RamSaleDAO implements SaleDAO {
     public void createMockSales() {
         for (int i = 1; i < 5; i++) {
             sale = new Sale();
+            sale.setName("Venda 00" + i);
             sale.setTicketValue(200 * i);
             sale.setCashValue(100 * i);
             sale.setSaleId(contador++);
@@ -63,7 +64,8 @@ public class RamSaleDAO implements SaleDAO {
         }
         for (Long i : map.keySet()) {
             System.out.println(map.get(i).getSaleId());
-            System.out.println(map.get(i).getBuyerId());
+            System.out.println(map.get(i).getName());
+            //System.out.println(map.get(i).getBuyerId());
 
         }
     }

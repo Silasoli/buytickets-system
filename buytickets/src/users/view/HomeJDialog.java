@@ -1,6 +1,10 @@
 package users.view;
 
 import java.awt.Color;
+import java.util.List;
+import javax.swing.JOptionPane;
+import sales.controller.SaleController;
+import sales.sales.Sale;
 import users.users.User;
 
 /**
@@ -8,6 +12,8 @@ import users.users.User;
  * @author silas
  */
 public class HomeJDialog extends javax.swing.JDialog {
+
+    private SaleTableModel saleTableModel;
 
     public User userInSession;
 
@@ -21,13 +27,14 @@ public class HomeJDialog extends javax.swing.JDialog {
         init();
         userInSession = user;
         setUserInScreen();
-
+        fillOfferTable();
         setModal(true);
         setLocationRelativeTo(parent);
     }
 
     public void init() {
-
+        saleTableModel = new SaleTableModel();
+        jTable2.setModel(saleTableModel);
     }
 
     public void setUserInScreen() {
@@ -47,16 +54,19 @@ public class HomeJDialog extends javax.swing.JDialog {
         userTicketBalancejLabel = new javax.swing.JLabel();
         userNamejLabel = new javax.swing.JLabel();
         getUserPurchasesjButton = new javax.swing.JButton();
+        closeProgramjButton2 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
+        listSalesjButton = new javax.swing.JButton();
+        buyjButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Home");
         setBackground(new java.awt.Color(0, 0, 0));
 
         jPanel2.setBackground(new java.awt.Color(153, 153, 153));
-
-        jPanel3.setBackground(new java.awt.Color(204, 204, 255));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel2.setText("Name:");
@@ -80,17 +90,27 @@ public class HomeJDialog extends javax.swing.JDialog {
         userNamejLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         getUserPurchasesjButton.setBackground(new java.awt.Color(255, 255, 255));
-        getUserPurchasesjButton.setText("Suas Compras");
+        getUserPurchasesjButton.setText("Encerrar sessão");
         getUserPurchasesjButton.setFocusPainted(false);
+        getUserPurchasesjButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                getUserPurchasesjButtonActionPerformed(evt);
+            }
+        });
+
+        closeProgramjButton2.setBackground(new java.awt.Color(255, 255, 255));
+        closeProgramjButton2.setText("Fechar Programa");
+        closeProgramjButton2.setFocusPainted(false);
+        closeProgramjButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                closeProgramjButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel3)
-                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
@@ -108,6 +128,15 @@ public class HomeJDialog extends javax.swing.JDialog {
                         .addContainerGap()
                         .addComponent(getUserPurchasesjButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(closeProgramjButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(0, 0, Short.MAX_VALUE))))
             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel3Layout.createSequentialGroup()
                     .addContainerGap()
@@ -125,9 +154,11 @@ public class HomeJDialog extends javax.swing.JDialog {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(userTicketBalancejLabel)
-                .addGap(39, 39, 39)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(getUserPurchasesjButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(237, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(closeProgramjButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel3Layout.createSequentialGroup()
                     .addGap(23, 23, 23)
@@ -139,13 +170,60 @@ public class HomeJDialog extends javax.swing.JDialog {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Ofertas");
 
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "ID", "Nome", "Saldo em Tickets", "Preço"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Long.class, java.lang.String.class, java.lang.Double.class, java.lang.Long.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(jTable2);
+
+        listSalesjButton.setBackground(new java.awt.Color(255, 255, 255));
+        listSalesjButton.setText("Listar");
+        listSalesjButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listSalesjButtonActionPerformed(evt);
+            }
+        });
+
+        buyjButton.setBackground(new java.awt.Color(255, 255, 255));
+        buyjButton.setText("Comprar");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 779, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 779, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(listSalesjButton, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(buyjButton, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -153,7 +231,13 @@ public class HomeJDialog extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(4, 4, 4)
+                .addComponent(listSalesjButton)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(buyjButton)
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -191,6 +275,35 @@ public class HomeJDialog extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void listSalesjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listSalesjButtonActionPerformed
+        fillOfferTable();
+    }//GEN-LAST:event_listSalesjButtonActionPerformed
+
+    private void closeProgramjButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeProgramjButton2ActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_closeProgramjButton2ActionPerformed
+
+    private void getUserPurchasesjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getUserPurchasesjButtonActionPerformed
+        userInSession = null;
+        setVisible(false);
+
+        LoginJDialog loginJDialog = new LoginJDialog(null);
+        loginJDialog.setVisible(true);
+        loginJDialog.dispose();
+        loginJDialog = null;
+    }//GEN-LAST:event_getUserPurchasesjButtonActionPerformed
+
+    public void fillOfferTable() {
+        try {
+
+            List<Sale> list = SaleController.getInstance().findAll();
+
+            saleTableModel.setList(list);
+        } catch (Exception err) {
+            JOptionPane.showMessageDialog(this, "Banco de dados não conectado");
+        }
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -204,6 +317,8 @@ public class HomeJDialog extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton buyjButton;
+    private javax.swing.JButton closeProgramjButton2;
     private javax.swing.JButton getUserPurchasesjButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -212,6 +327,9 @@ public class HomeJDialog extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable2;
+    private javax.swing.JButton listSalesjButton;
     private javax.swing.JLabel userNamejLabel;
     private javax.swing.JLabel userTicketBalancejLabel;
     // End of variables declaration//GEN-END:variables

@@ -11,6 +11,7 @@ package sales.sales;
 public class Sale {
 
     private long saleId;
+    private String name;
     private long buyerId;
     private double cashValue;
     private double ticketValue;
@@ -18,9 +19,17 @@ public class Sale {
     public Sale() {
         //empty constructor
     }
-   
+
     public double getCashValue() {
         return cashValue;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public double getTicketValue() {
