@@ -4,6 +4,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import sales.controller.SaleController;
 import sales.sales.Sale;
+import users.controller.UserController;
 import users.users.User;
 
 /**
@@ -24,8 +25,7 @@ public class HomeJDialog extends javax.swing.JDialog {
         super(parent);
         initComponents();
         init();
-        userInSession = user;
-        setUserInScreen();
+        setUserInScreen(user);
         fillOfferTable();
         setModal(true);
         setLocationRelativeTo(parent);
@@ -36,9 +36,14 @@ public class HomeJDialog extends javax.swing.JDialog {
         jTable.setModel(saleTableModel);
     }
 
-    public void setUserInScreen() {
-        userNamejLabel.setText(userInSession.getName());
-        userTicketBalancejLabel.setText("R$ " + String.valueOf(userInSession.getTicketBalance()));
+    public void setUserInScreen(User user) {
+        try {
+            userInSession = UserController.getInstance().findOne(user.getUserId());
+            userNamejLabel.setText(userInSession.getName());
+            userTicketBalancejLabel.setText("R$ " + String.valueOf(userInSession.getTicketBalance()));
+        } catch (Exception err) {
+            JOptionPane.showMessageDialog(this, "Falha ao comprar");
+        }
     }
 
     public Sale getSaleSelected() throws Exception {
@@ -307,10 +312,20 @@ public class HomeJDialog extends javax.swing.JDialog {
 
     private void buyjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buyjButtonActionPerformed
         try {
+            Sale saleBeingMade = getSaleSelected();
+            int response = JOptionPane.showConfirmDialog(this, "Deseja finalizar a compra?");
+            if (response == JOptionPane.YES_OPTION) {
+                SaleController.getInstance().remove(saleBeingMade.getSaleId());
+                userInSession.setTicketBalance(userInSession.getTicketBalance()+saleBeingMade.getTicketValue());
+                UserController.getInstance().update(userInSession);
+                setUserInScreen(userInSession);
+            }
+
         } catch (Exception err) {
             JOptionPane.showMessageDialog(this, "Falha ao comprar");
 
         }
+        fillOfferTable();
     }//GEN-LAST:event_buyjButtonActionPerformed
 
     public void fillOfferTable() {

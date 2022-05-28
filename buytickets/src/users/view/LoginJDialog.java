@@ -10,8 +10,6 @@ import users.users.User;
  */
 public class LoginJDialog extends javax.swing.JDialog {
 
-    public String name;
-    public String password;
     public User userInSession;
 
     /**
@@ -21,16 +19,11 @@ public class LoginJDialog extends javax.swing.JDialog {
     public LoginJDialog(java.awt.Window parent) {
         super(parent);
         initComponents();
-        init();
 
         setModal(true);
         setLocationRelativeTo(parent);
     }
-
-    public void init() {
-
-    }
-
+   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -42,6 +35,7 @@ public class LoginJDialog extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
         loginjButton = new javax.swing.JButton();
         toCreateUserjButton = new javax.swing.JButton();
+        closeProgramjButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Login");
@@ -74,6 +68,13 @@ public class LoginJDialog extends javax.swing.JDialog {
             }
         });
 
+        closeProgramjButton.setText("Fechar Programa");
+        closeProgramjButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                closeProgramjButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -101,7 +102,9 @@ public class LoginJDialog extends javax.swing.JDialog {
                                                 .addComponent(nameUser, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
                         .addGap(0, 341, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addContainerGap()
+                        .addComponent(closeProgramjButton, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(toCreateUserjButton, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -121,7 +124,9 @@ public class LoginJDialog extends javax.swing.JDialog {
                 .addGap(43, 43, 43)
                 .addComponent(loginjButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24)
-                .addComponent(toCreateUserjButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(toCreateUserjButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(closeProgramjButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -135,10 +140,7 @@ public class LoginJDialog extends javax.swing.JDialog {
 
     private void loginjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginjButtonActionPerformed
         try {
-            this.name = nameUser.getText();
-            this.password = passwordUser.getText();
-
-            userInSession = UserController.getInstance().login(this.name, this.password);
+            userInSession = UserController.getInstance().login(nameUser.getText(), passwordUser.getText());
             setVisible(false);
 
             HomeJDialog homeJDialog = new HomeJDialog(null, userInSession);
@@ -158,6 +160,10 @@ public class LoginJDialog extends javax.swing.JDialog {
         createUserJDialog = null;        // TODO add your handling code here:
     }//GEN-LAST:event_toCreateUserjButtonActionPerformed
 
+    private void closeProgramjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeProgramjButtonActionPerformed
+      System.exit(0);
+    }//GEN-LAST:event_closeProgramjButtonActionPerformed
+
     public static void main(String arg[]) {
         LoginJDialog loginJDialog = new LoginJDialog(null);
         loginJDialog.setVisible(true);
@@ -168,6 +174,7 @@ public class LoginJDialog extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton closeProgramjButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

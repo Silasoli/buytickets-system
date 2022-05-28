@@ -78,4 +78,8 @@ public class SaleTableModel extends AbstractTableModel {
         fireTableDataChanged();
     }
 
+    public Sale get(int row) {
+        return list.get(row);
+    }
+
 }

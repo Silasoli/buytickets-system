@@ -31,7 +31,7 @@ public class RamUserDAO implements UserDAO {
                 return map.get(i);
             }
         }
-        throw new Exception();
+        throw new Exception("Usuário não encontrado");
     }
 
     @Override
